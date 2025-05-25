@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. PoissonRecon plugin &mdash; cloudComPy 2.12a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. RANSAC_SD plugin" href="RANSAC_SD.html" />
+    <link rel="prev" title="7. PCV plugin" href="PCV.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cloudComPy
+          </a>
+              <div class="version">
+                2.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. cloudComPy: a first example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. license</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy User Manual: basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userIntro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userLoad.html">2. Loading clouds and other entities from files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userSave.html">3. Saving Clouds and other entities to files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userEntities.html">4. Clouds, meshes, scalar fields: introspection, manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userNumpy.html">5. operations on coordinates, scalar fields, colors, normals, meshes with Numpy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Some use cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html">1. Create a point cloud with numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cut-a-cloud-or-a-mesh-with-a-polyline">2. Cut a cloud or a mesh with a polyline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distances-between-clouds-and-meshes">3. Compute distances between clouds and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-registration">4. Cloud registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-triangulation-create-a-mesh">5. Cloud triangulation: create a mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#fitting-ccplane">6. Fitting ccPlane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#searching-points-in-neighbourhood">7. Searching points in neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-sampling-noise-filter-filter-by-scalar-field">8. Cloud sampling, noise filter, filter by scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#generate-histograms">9. Generate histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-a-2-5d-volume">10. Compute a 2.5D volume</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-rasterization">11. Cloud rasterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#interpolate-scalar-fields-from-one-cloud-to-another">12. Interpolate scalar fields from one cloud to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-an-optimal-bounding-box">13. Finding an optimal bounding box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#working-with-quaternions-for-rotations">14. Working with quaternions for rotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-comparison-with-plugin-m3c2">15. Cloud comparison with plugin M3C2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#shadevis-ambiant-occlusion-with-plugin-pcv">16. ShadeVIS (ambiant occlusion) with Plugin PCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-hidden-point-removal-with-plugin-hpr">17. Compute Hidden Point Removal with plugin HPR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#boolean-operations-on-meshes-with-plugin-meshboolean-or-plugin-cork">18. Boolean operations on meshes with plugin MeshBoolean or plugin Cork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-primitives-on-a-cloud-with-plugin-ransac-sd">19. Finding primitives on a cloud with plugin RANSAC-SD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-cloth-simulation-filter-on-a-cloud-with-csf-plugin">20. Compute Cloth Simulation Filter on a cloud with CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#classify-a-point-cloud-with-canupo-plugin-and-a-trained-classifier">21. Classify a point cloud with Canupo plugin and a trained classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distance-between-a-cloud-and-a-surface-of-revolution-with-sra-plugin">22. Compute distance between a cloud and a surface of revolution, with SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#surface-mesh-reconstruction-with-poisson-reconstruction-plugin">23. Surface Mesh reconstruction, with Poisson Reconstruction plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#sclices-and-contours">24. Sclices and contours</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-sections-generate-cloud-slices-and-profiles">25. Extract Sections (generate cloud slices and profiles)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-or-label-connected-components">26. Extract or Label Connected Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#merge-several-entities-clouds-or-meshes">27. Merge several entities (clouds or meshes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#avoid-memory-leaks-in-an-iterative-process">28. Avoid memory leaks in an iterative process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#render-a-3d-scene-to-an-image-file">29. Render a 3D scene to an image file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#choosing-a-specific-color-scale-for-a-scalar-field-rendering">30. choosing a specific color scale for a scalar field rendering</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloudComPy.html">1. cloudComPy module, functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPointCloud.html">2. Points Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPolyline.html">3. Polylines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccOctree.html">4. Octrees, descriptors and neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccMesh.html">5. Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html">6. ccPrimitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html#transformations">7. transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccSensor.html">8. Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ScalarField.html">9. Scalar Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DistanceComputationTools.html">10. Distance Computation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeometricalAnalysisTools.html">11. Geometrical Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudSamplingTools.html">12. Cloud Sampling Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccFacet.html">13. 2D Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Neighbourhood.html">14. Neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">15. Colors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">plugins Reference documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Canupo.html">1. Canupo plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSF.html">2. CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HPR.html">3. HPR plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3C2.html">4. M3C2 plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MeshBoolean.html">5. MeshBoolean plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCL.html">6. PCL plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCV.html">7. PCV plugin</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. PoissonRecon plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cloudComPy.PoissonRecon.PR"><code class="docutils literal notranslate"><span class="pre">PR</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.PR.PoissonReconstruction"><code class="docutils literal notranslate"><span class="pre">PR.PoissonReconstruction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.PR.__init__"><code class="docutils literal notranslate"><span class="pre">PR.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType"><code class="docutils literal notranslate"><span class="pre">BoundaryType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.DIRICHLET"><code class="docutils literal notranslate"><span class="pre">BoundaryType.DIRICHLET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.FREE"><code class="docutils literal notranslate"><span class="pre">BoundaryType.FREE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.NEUMANN"><code class="docutils literal notranslate"><span class="pre">BoundaryType.NEUMANN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.__init__"><code class="docutils literal notranslate"><span class="pre">BoundaryType.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.name"><code class="docutils literal notranslate"><span class="pre">BoundaryType.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType.value"><code class="docutils literal notranslate"><span class="pre">BoundaryType.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloudComPy.PoissonRecon.initTrace_PoissonRecon"><code class="docutils literal notranslate"><span class="pre">initTrace_PoissonRecon()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RANSAC_SD.html">9. RANSAC_SD plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SRA.html">10. SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MinimalBoundingBox.html">11. minimalBoundingBox Python plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices and tables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">1. general index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html#module-index">2. module index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cloudComPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>PoissonRecon plugin</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/PoissonRecon.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-cloudComPy.PoissonRecon">
+<span id="poissonrecon-plugin"></span><h1><span class="section-number">8. </span>PoissonRecon plugin<a class="headerlink" href="#module-cloudComPy.PoissonRecon" title="Permalink to this heading"></a></h1>
+<p>PoissonRecon is a standard plugin of cloudComPy.</p>
+<p>The availability of the plugin can be tested with the <a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginPoissonRecon" title="cloudComPy.isPluginPoissonRecon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cloudComPy.isPluginPoissonRecon()</span></code></a> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">isPoissonRecon_available</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">isPluginPoissonRecon</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>PoissonRecon is a submodule of cloudCompy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cloudComPy</span> <span class="k">as</span> <span class="nn">cc</span>
+<span class="c1"># ...</span>
+<span class="k">if</span> <span class="n">cc</span><span class="o">.</span><span class="n">isPluginPoissonRecon</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">cloudComPy.PoissonRecon</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">PoissonRecon</span><span class="o">.</span><span class="n">PR</span><span class="o">.</span><span class="n">PoissonReconstruction</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.PR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.PoissonRecon.</span></span><span class="sig-name descname"><span class="pre">PR</span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.PR" title="Permalink to this definition"></a></dt>
+<dd><p>We only use the static method PoissonReconstruction of this class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.PR.PoissonReconstruction">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PoissonReconstruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pc:</span> <span class="pre">_cloudComPy.ccPointCloud</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">finestCellWidth:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplesPerNode:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">withColors:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointWeight:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearFit:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary:</span> <span class="pre">_PoissonRecon.BoundaryType</span> <span class="pre">=</span> <span class="pre">&lt;BoundaryType.NEUMANN:</span> <span class="pre">2&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ccMesh.html#cloudComPy.ccMesh" title="_cloudComPy.ccMesh"><span class="pre">_cloudComPy.ccMesh</span></a></span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.PR.PoissonReconstruction" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Build a mesh on a point cloud using the PoissonReconstruction algorithm.</dt><dd><p>Wrapper to the ‘Poisson Surface Reconstruction (Version 9)’ algorithm 
+‘Poisson Surface Reconstruction’, M. Kazhdan, M. Bolitho, and H. Hoppe
+Symposium on Geometry Processing (June 2006), pages 61–70
+<a class="reference external" href="http://www.cs.jhu.edu/~misha/Code/PoissonRecon/">http://www.cs.jhu.edu/~misha/Code/PoissonRecon/</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pc</strong> (<a class="reference internal" href="ccPointCloud.html#cloudComPy.ccPointCloud" title="cloudComPy.ccPointCloud"><em>ccPointCloud</em></a>) – the point cloud</p></li>
+<li><p><strong>depth</strong> (<em>int</em><em>,</em><em>optional</em>) – octree depth, default 8
+The maximum depth of the tree that will be used for surface reconstruction.
+Running at depth d corresponds to solving on a 2^d x 2^d x 2^d.
+Note that since the reconstructor adapts the octree to the sampling density,
+the specified reconstruction depth is only an upper bound.</p></li>
+<li><p><strong>finestCellWidth</strong> (<em>float</em><em>,</em><em>optional</em>) – default 0.0
+The target width of the finest level octree cells (ignored if depth is specified)</p></li>
+<li><p><strong>samplesPerNode</strong> (<em>float</em><em>,</em><em>optional</em>) – default 1.5
+The minimum number of sample points that should fall within an octree node
+as the octree construction is adapted to sampling density.
+This parameter specifies the minimum number of points that should fall within an octree node.
+For noise-free samples, small values in the range [1.0 - 5.0] can be used. 
+For more noisy samples, larger values in the range [15.0 - 20.0]
+may be needed to provide a smoother, noise-reduced, reconstruction.</p></li>
+<li><p><strong>withColors</strong> (<em>bool</em><em>,</em><em>optional</em>) – default False
+This flag tells the reconstructor to read in color values with the input points
+and extrapolate those to the vertices of the output.</p></li>
+<li><p><strong>density</strong> (<em>bool</em><em>,</em><em>optional</em>) – default False
+If this flag is enabled, the sampling density is written out with the vertices</p></li>
+<li><p><strong>pointWeight</strong> (<em>float</em><em>,</em><em>optional</em>) – default 2.0
+The importance that interpolation of the point samples is given in the formulation
+of the screened Poisson equation. The results of the original (unscreened)
+Poisson Reconstruction can be obtained by setting this value to 0.</p></li>
+<li><p><strong>threads</strong> (<em>int</em><em>,</em><em>optional</em>) – default 1
+This parameter specifies the number of threads across which the solver should be parallelized</p></li>
+<li><p><strong>linearFit</strong> (<em>bool</em><em>,</em><em>optional</em>) – default False
+Enabling this flag has the reconstructor use linear interpolation
+to estimate the positions of iso-vertices.</p></li>
+<li><p><strong>boundary</strong> (<em>PoissonReconLib::Parameters::BoundaryType</em><em>,</em><em>optional</em>) – default NEUMANN
+Boundary type for the finite elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the mesh (or None if failed)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ccMesh.html#cloudComPy.ccMesh" title="cloudComPy.ccMesh">ccMesh</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.PR.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cloudComPy.PoissonRecon.PR.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.PoissonRecon.</span></span><span class="sig-name descname"><span class="pre">BoundaryType</span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType" title="Permalink to this definition"></a></dt>
+<dd><p>Members:</p>
+<p>FREE</p>
+<p>DIRICHLET</p>
+<p>NEUMANN</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.DIRICHLET">
+<span class="sig-name descname"><span class="pre">DIRICHLET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;BoundaryType.DIRICHLET:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.DIRICHLET" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.FREE">
+<span class="sig-name descname"><span class="pre">FREE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;BoundaryType.FREE:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.FREE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.NEUMANN">
+<span class="sig-name descname"><span class="pre">NEUMANN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;BoundaryType.NEUMANN:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.NEUMANN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.PoissonRecon.BoundaryType" title="_PoissonRecon.BoundaryType"><span class="pre">_PoissonRecon.BoundaryType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.BoundaryType.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.BoundaryType.value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cloudComPy.PoissonRecon.initTrace_PoissonRecon">
+<span class="sig-prename descclassname"><span class="pre">cloudComPy.PoissonRecon.</span></span><span class="sig-name descname"><span class="pre">initTrace_PoissonRecon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.PoissonRecon.initTrace_PoissonRecon" title="Permalink to this definition"></a></dt>
+<dd><p>Debug trace must be initialized for each Python module.</p>
+<p>Done in module init, following the value of environment variable _CCTRACE_ (“ON” if debug traces wanted)</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PCV.html" class="btn btn-neutral float-left" title="7. PCV plugin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="RANSAC_SD.html" class="btn btn-neutral float-right" title="9. RANSAC_SD plugin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Paul RASCLE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

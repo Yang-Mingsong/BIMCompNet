@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. Scalar Fields &mdash; cloudComPy 2.12a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Distance Computation Tools" href="DistanceComputationTools.html" />
+    <link rel="prev" title="8. Sensor" href="ccSensor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cloudComPy
+          </a>
+              <div class="version">
+                2.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. cloudComPy: a first example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. license</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy User Manual: basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userIntro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userLoad.html">2. Loading clouds and other entities from files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userSave.html">3. Saving Clouds and other entities to files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userEntities.html">4. Clouds, meshes, scalar fields: introspection, manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userNumpy.html">5. operations on coordinates, scalar fields, colors, normals, meshes with Numpy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Some use cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html">1. Create a point cloud with numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cut-a-cloud-or-a-mesh-with-a-polyline">2. Cut a cloud or a mesh with a polyline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distances-between-clouds-and-meshes">3. Compute distances between clouds and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-registration">4. Cloud registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-triangulation-create-a-mesh">5. Cloud triangulation: create a mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#fitting-ccplane">6. Fitting ccPlane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#searching-points-in-neighbourhood">7. Searching points in neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-sampling-noise-filter-filter-by-scalar-field">8. Cloud sampling, noise filter, filter by scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#generate-histograms">9. Generate histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-a-2-5d-volume">10. Compute a 2.5D volume</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-rasterization">11. Cloud rasterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#interpolate-scalar-fields-from-one-cloud-to-another">12. Interpolate scalar fields from one cloud to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-an-optimal-bounding-box">13. Finding an optimal bounding box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#working-with-quaternions-for-rotations">14. Working with quaternions for rotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-comparison-with-plugin-m3c2">15. Cloud comparison with plugin M3C2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#shadevis-ambiant-occlusion-with-plugin-pcv">16. ShadeVIS (ambiant occlusion) with Plugin PCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-hidden-point-removal-with-plugin-hpr">17. Compute Hidden Point Removal with plugin HPR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#boolean-operations-on-meshes-with-plugin-meshboolean-or-plugin-cork">18. Boolean operations on meshes with plugin MeshBoolean or plugin Cork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-primitives-on-a-cloud-with-plugin-ransac-sd">19. Finding primitives on a cloud with plugin RANSAC-SD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-cloth-simulation-filter-on-a-cloud-with-csf-plugin">20. Compute Cloth Simulation Filter on a cloud with CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#classify-a-point-cloud-with-canupo-plugin-and-a-trained-classifier">21. Classify a point cloud with Canupo plugin and a trained classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distance-between-a-cloud-and-a-surface-of-revolution-with-sra-plugin">22. Compute distance between a cloud and a surface of revolution, with SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#surface-mesh-reconstruction-with-poisson-reconstruction-plugin">23. Surface Mesh reconstruction, with Poisson Reconstruction plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#sclices-and-contours">24. Sclices and contours</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-sections-generate-cloud-slices-and-profiles">25. Extract Sections (generate cloud slices and profiles)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-or-label-connected-components">26. Extract or Label Connected Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#merge-several-entities-clouds-or-meshes">27. Merge several entities (clouds or meshes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#avoid-memory-leaks-in-an-iterative-process">28. Avoid memory leaks in an iterative process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#render-a-3d-scene-to-an-image-file">29. Render a 3D scene to an image file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#choosing-a-specific-color-scale-for-a-scalar-field-rendering">30. choosing a specific color scale for a scalar field rendering</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy Reference documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cloudComPy.html">1. cloudComPy module, functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPointCloud.html">2. Points Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPolyline.html">3. Polylines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccOctree.html">4. Octrees, descriptors and neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccMesh.html">5. Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html">6. ccPrimitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html#transformations">7. transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccSensor.html">8. Sensor</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Scalar Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ccscalarfield">9.1. ccScalarField</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.ccScalarField"><code class="docutils literal notranslate"><span class="pre">ccScalarField</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.__init__"><code class="docutils literal notranslate"><span class="pre">ccScalarField.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.addElement"><code class="docutils literal notranslate"><span class="pre">ccScalarField.addElement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.computeMeanAndVariance"><code class="docutils literal notranslate"><span class="pre">ccScalarField.computeMeanAndVariance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.computeMinAndMax"><code class="docutils literal notranslate"><span class="pre">ccScalarField.computeMinAndMax()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.currentSize"><code class="docutils literal notranslate"><span class="pre">ccScalarField.currentSize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.fill"><code class="docutils literal notranslate"><span class="pre">ccScalarField.fill()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.flagValueAsInvalid"><code class="docutils literal notranslate"><span class="pre">ccScalarField.flagValueAsInvalid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.fromNpArrayCopy"><code class="docutils literal notranslate"><span class="pre">ccScalarField.fromNpArrayCopy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.getGlobalShift"><code class="docutils literal notranslate"><span class="pre">ccScalarField.getGlobalShift()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.getMax"><code class="docutils literal notranslate"><span class="pre">ccScalarField.getMax()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.getMin"><code class="docutils literal notranslate"><span class="pre">ccScalarField.getMin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.getName"><code class="docutils literal notranslate"><span class="pre">ccScalarField.getName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.getValue"><code class="docutils literal notranslate"><span class="pre">ccScalarField.getValue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.isSerializable"><code class="docutils literal notranslate"><span class="pre">ccScalarField.isSerializable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.reserveSafe"><code class="docutils literal notranslate"><span class="pre">ccScalarField.reserveSafe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.resizeSafe"><code class="docutils literal notranslate"><span class="pre">ccScalarField.resizeSafe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.setColorScale"><code class="docutils literal notranslate"><span class="pre">ccScalarField.setColorScale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.setName"><code class="docutils literal notranslate"><span class="pre">ccScalarField.setName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.setValue"><code class="docutils literal notranslate"><span class="pre">ccScalarField.setValue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.swap"><code class="docutils literal notranslate"><span class="pre">ccScalarField.swap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.toNpArray"><code class="docutils literal notranslate"><span class="pre">ccScalarField.toNpArray()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccScalarField.toNpArrayCopy"><code class="docutils literal notranslate"><span class="pre">ccScalarField.toNpArrayCopy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bases-classes-for-ccscalarfield">9.2. bases classes for ccScalarField</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.ScalarField"><code class="docutils literal notranslate"><span class="pre">ScalarField</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.__init__"><code class="docutils literal notranslate"><span class="pre">ScalarField.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.addElement"><code class="docutils literal notranslate"><span class="pre">ScalarField.addElement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.computeMeanAndVariance"><code class="docutils literal notranslate"><span class="pre">ScalarField.computeMeanAndVariance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.computeMinAndMax"><code class="docutils literal notranslate"><span class="pre">ScalarField.computeMinAndMax()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.currentSize"><code class="docutils literal notranslate"><span class="pre">ScalarField.currentSize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.fill"><code class="docutils literal notranslate"><span class="pre">ScalarField.fill()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.flagValueAsInvalid"><code class="docutils literal notranslate"><span class="pre">ScalarField.flagValueAsInvalid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.fromNpArrayCopy"><code class="docutils literal notranslate"><span class="pre">ScalarField.fromNpArrayCopy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.getMax"><code class="docutils literal notranslate"><span class="pre">ScalarField.getMax()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.getMin"><code class="docutils literal notranslate"><span class="pre">ScalarField.getMin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.getName"><code class="docutils literal notranslate"><span class="pre">ScalarField.getName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.getValue"><code class="docutils literal notranslate"><span class="pre">ScalarField.getValue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.reserveSafe"><code class="docutils literal notranslate"><span class="pre">ScalarField.reserveSafe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.resizeSafe"><code class="docutils literal notranslate"><span class="pre">ScalarField.resizeSafe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.setName"><code class="docutils literal notranslate"><span class="pre">ScalarField.setName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.setValue"><code class="docutils literal notranslate"><span class="pre">ScalarField.setValue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.swap"><code class="docutils literal notranslate"><span class="pre">ScalarField.swap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.toNpArray"><code class="docutils literal notranslate"><span class="pre">ScalarField.toNpArray()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ScalarField.toNpArrayCopy"><code class="docutils literal notranslate"><span class="pre">ScalarField.toNpArrayCopy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#color-scales-for-scalar-fields">9.3. color scales for scalar fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.ccColorScale"><code class="docutils literal notranslate"><span class="pre">ccColorScale</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.Create"><code class="docutils literal notranslate"><span class="pre">ccColorScale.Create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.__init__"><code class="docutils literal notranslate"><span class="pre">ccColorScale.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.getName"><code class="docutils literal notranslate"><span class="pre">ccColorScale.getName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.getUuid"><code class="docutils literal notranslate"><span class="pre">ccColorScale.getUuid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.insert"><code class="docutils literal notranslate"><span class="pre">ccColorScale.insert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScale.setName"><code class="docutils literal notranslate"><span class="pre">ccColorScale.setName()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.ccColorScalesManager"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.GetUniqueInstance"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.GetUniqueInstance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.__init__"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.addScale"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.addScale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.getDefaultScale"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.getDefaultScale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.getScale"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.getScale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.removeScale"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.removeScale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.ccColorScalesManager.toPersistentSettings"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager.toPersistentSettings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.ABS_NORM_GREY"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.ABS_NORM_GREY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.BGYR"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.BGYR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.BROWN_YELLOW"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.BROWN_YELLOW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.BWR"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.BWR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.CIVIDIS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.CIVIDIS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.DIP_BRYW"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.DIP_BRYW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.DIP_DIR_REPEAT"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.DIP_DIR_REPEAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.GREY"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.GREY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.HIGH_CONTRAST"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.HIGH_CONTRAST</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.HSV_360_DEG"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.HSV_360_DEG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.RW"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.RW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.RY"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.RY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.TOPO_LANDSERF"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.TOPO_LANDSERF</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.VERTEX_QUALITY"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.VERTEX_QUALITY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.VIRIDIS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.VIRIDIS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.YELLOW_BROWN"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.YELLOW_BROWN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.__init__"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.name"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES.value"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DistanceComputationTools.html">10. Distance Computation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeometricalAnalysisTools.html">11. Geometrical Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudSamplingTools.html">12. Cloud Sampling Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccFacet.html">13. 2D Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Neighbourhood.html">14. Neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">15. Colors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">plugins Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Canupo.html">1. Canupo plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSF.html">2. CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HPR.html">3. HPR plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3C2.html">4. M3C2 plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MeshBoolean.html">5. MeshBoolean plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCL.html">6. PCL plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCV.html">7. PCV plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoissonRecon.html">8. PoissonRecon plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RANSAC_SD.html">9. RANSAC_SD plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SRA.html">10. SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MinimalBoundingBox.html">11. minimalBoundingBox Python plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices and tables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">1. general index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html#module-index">2. module index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cloudComPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>Scalar Fields</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ScalarField.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scalar-fields">
+<h1><span class="section-number">9. </span>Scalar Fields<a class="headerlink" href="#scalar-fields" title="Permalink to this heading"></a></h1>
+<section id="ccscalarfield">
+<h2><span class="section-number">9.1. </span>ccScalarField<a class="headerlink" href="#ccscalarfield" title="Permalink to this heading"></a></h2>
+<p>All the inherited members are given here for convenience.
+Most of the time, this class is used rather than the bases classes.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.</span></span><span class="sig-name descname"><span class="pre">ccScalarField</span></span><a class="headerlink" href="#cloudComPy.ccScalarField" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarField</span></code></a></p>
+<p>A scalar field associated to display-related parameters.
+Extends the CCCoreLib::ScalarField object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccScalarField" title="_cloudComPy.ccScalarField"><span class="pre">_cloudComPy.ccScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Default constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>,</em><em>optional</em>) – scalarField name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.addElement">
+<span class="sig-name descname"><span class="pre">addElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.addElement" title="Permalink to this definition"></a></dt>
+<dd><p>Add a value at the end of the vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – the value to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.computeMeanAndVariance">
+<span class="sig-name descname"><span class="pre">computeMeanAndVariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.computeMeanAndVariance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a tuple (mean, variance).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(mean, variance)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.computeMinAndMax">
+<span class="sig-name descname"><span class="pre">computeMinAndMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.computeMinAndMax" title="Permalink to this definition"></a></dt>
+<dd><p>Should be called before getMin or getMax, for instance after modifying
+the scalar field with Numpy.</p>
+<p>No return!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.currentSize">
+<span class="sig-name descname"><span class="pre">currentSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.currentSize" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the vector size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the vector size</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.fill" title="Permalink to this definition"></a></dt>
+<dd><p>Fills the array with a particular value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – the value to use to fill the array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.flagValueAsInvalid">
+<span class="sig-name descname"><span class="pre">flagValueAsInvalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.flagValueAsInvalid" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value as ‘invalid’ (i.e. CCCoreLib::NAN_VALUE).</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index in the ScalarField to set as ‘invalid’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.fromNpArrayCopy">
+<span class="sig-name descname"><span class="pre">fromNpArrayCopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.fromNpArrayCopy" title="Permalink to this definition"></a></dt>
+<dd><p>Copy data from numpy array into an existing ScalarField.</p>
+<p>Checks if the numpy array is of PyScalarType, one dimension, same size as the ScalarField,
+before overwriting ScalarField data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nparray</strong> (<em>ndarray</em>) – the data source to use to overwrite the ScalarField</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.getGlobalShift">
+<span class="sig-name descname"><span class="pre">getGlobalShift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccScalarField" title="_cloudComPy.ccScalarField"><span class="pre">_cloudComPy.ccScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.getGlobalShift" title="Permalink to this definition"></a></dt>
+<dd><p>Returns Global Shift if any.
+Used for instance for LAS GPS time shift</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>global shift</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.getMax">
+<span class="sig-name descname"><span class="pre">getMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.getMax" title="Permalink to this definition"></a></dt>
+<dd><p>Returns maximal value of the ScalarField.</p>
+<p>You should call computeMinAndMax before, after a modification of the ScalarField with Numpy!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>max value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.getMin">
+<span class="sig-name descname"><span class="pre">getMin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.getMin" title="Permalink to this definition"></a></dt>
+<dd><p>Returns minimal value of the ScalarField.</p>
+<p>You should call call computeMinAndMax before, after a modification of the ScalarField with Numpy!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>min value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.getName">
+<span class="sig-name descname"><span class="pre">getName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.getName" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the name of the ScalarField.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ScalarField name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.getValue">
+<span class="sig-name descname"><span class="pre">getValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cloudComPy.ccScalarField.getValue" title="Permalink to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>getValue(self: _cloudComPy.ScalarField, arg0: int) -&gt; float</p></li>
+</ol>
+<p>Returns the ScalarField value at a given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value at index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>getValue(self: _cloudComPy.ScalarField, arg0: int) -&gt; float</p></li>
+</ol>
+<p>Returns the ScalarField value at a given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value at index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.isSerializable">
+<span class="sig-name descname"><span class="pre">isSerializable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccScalarField" title="_cloudComPy.ccScalarField"><span class="pre">_cloudComPy.ccScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.isSerializable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.reserveSafe">
+<span class="sig-name descname"><span class="pre">reserveSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.reserveSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Reserves memory (no exception thrown).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of elements to reserve in the ScalarField</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.resizeSafe">
+<span class="sig-name descname"><span class="pre">resizeSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.resizeSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Resizes memory (no exception thrown).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count</strong> (<em>int</em>) – number of elements to keep/reserve in the ScalarField</p></li>
+<li><p><strong>init</strong> (<em>bool</em>) – whether to initialize new elements</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – value for new elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.setColorScale">
+<span class="sig-name descname"><span class="pre">setColorScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccScalarField" title="_cloudComPy.ccScalarField"><span class="pre">_cloudComPy.ccScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.setColorScale" title="Permalink to this definition"></a></dt>
+<dd><p>Sets associated color scale</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scale</strong> (<a class="reference internal" href="#cloudComPy.ccColorScale" title="cloudComPy.ccColorScale"><em>ccColorScale</em></a>) – the color scale</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.setName">
+<span class="sig-name descname"><span class="pre">setName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.setName" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the name of the ScalarField. No control is done on the uniqueness of the name.
+It is your responsability to ensure this uniqueness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – new name for the ScalarField</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.setValue">
+<span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.setValue" title="Permalink to this definition"></a></dt>
+<dd><p>Set the value at the given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – index in the ScalarField</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – value to set at index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.swap">
+<span class="sig-name descname"><span class="pre">swap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.swap" title="Permalink to this definition"></a></dt>
+<dd><p>Swap values between two indices.</p>
+<p><strong>No check on indices validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index1</strong> (<em>int</em>) – first index</p></li>
+<li><p><strong>index2</strong> (<em>int</em>) – second index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.toNpArray">
+<span class="sig-name descname"><span class="pre">toNpArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.toNpArray" title="Permalink to this definition"></a></dt>
+<dd><p>Wrap the ScalarField data into a numpy Array.</p>
+<p>Returns a numpy array: a one dimension array of (number of Points).
+Data is not copied, the numpy array object does not own the data.</p>
+<p><strong>WARNING</strong> No automatic action on the Python side on the variables referencing the C++ object in case of destruction!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>numpy Array pointing to the ScalarField data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccScalarField.toNpArrayCopy">
+<span class="sig-name descname"><span class="pre">toNpArrayCopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#cloudComPy.ccScalarField.toNpArrayCopy" title="Permalink to this definition"></a></dt>
+<dd><p>Wrap the ScalarField data into a numpy Array.</p>
+<p>Returns a numpy array: a one dimension array of (number of Points).
+Data is copied, the numpy array object owns its data.
+Ownership is transfered to Python:
+the numpy array object and its data will be handled by the Python Garbage Collector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>numpy Array with data copied from the ScalarField data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="bases-classes-for-ccscalarfield">
+<h2><span class="section-number">9.2. </span>bases classes for ccScalarField<a class="headerlink" href="#bases-classes-for-ccscalarfield" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.</span></span><span class="sig-name descname"><span class="pre">ScalarField</span></span><a class="headerlink" href="#cloudComPy.ScalarField" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A simple scalar field (to be associated to a point cloud).</p>
+<p>A monodimensional array of scalar values.
+Invalid values can be represented by CCCoreLib::NAN_VALUE.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Default constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>,</em><em>optional</em>) – scalarField name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.addElement">
+<span class="sig-name descname"><span class="pre">addElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.addElement" title="Permalink to this definition"></a></dt>
+<dd><p>Add a value at the end of the vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – the value to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.computeMeanAndVariance">
+<span class="sig-name descname"><span class="pre">computeMeanAndVariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.computeMeanAndVariance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a tuple (mean, variance).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(mean, variance)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.computeMinAndMax">
+<span class="sig-name descname"><span class="pre">computeMinAndMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.computeMinAndMax" title="Permalink to this definition"></a></dt>
+<dd><p>Should be called before getMin or getMax, for instance after modifying
+the scalar field with Numpy.</p>
+<p>No return!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.currentSize">
+<span class="sig-name descname"><span class="pre">currentSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.currentSize" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the vector size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the vector size</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.fill">
+<span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.fill" title="Permalink to this definition"></a></dt>
+<dd><p>Fills the array with a particular value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – the value to use to fill the array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.flagValueAsInvalid">
+<span class="sig-name descname"><span class="pre">flagValueAsInvalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.flagValueAsInvalid" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value as ‘invalid’ (i.e. CCCoreLib::NAN_VALUE).</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index in the ScalarField to set as ‘invalid’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.fromNpArrayCopy">
+<span class="sig-name descname"><span class="pre">fromNpArrayCopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.fromNpArrayCopy" title="Permalink to this definition"></a></dt>
+<dd><p>Copy data from numpy array into an existing ScalarField.</p>
+<p>Checks if the numpy array is of PyScalarType, one dimension, same size as the ScalarField,
+before overwriting ScalarField data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nparray</strong> (<em>ndarray</em>) – the data source to use to overwrite the ScalarField</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.getMax">
+<span class="sig-name descname"><span class="pre">getMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.getMax" title="Permalink to this definition"></a></dt>
+<dd><p>Returns maximal value of the ScalarField.</p>
+<p>You should call computeMinAndMax before, after a modification of the ScalarField with Numpy!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>max value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.getMin">
+<span class="sig-name descname"><span class="pre">getMin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.getMin" title="Permalink to this definition"></a></dt>
+<dd><p>Returns minimal value of the ScalarField.</p>
+<p>You should call call computeMinAndMax before, after a modification of the ScalarField with Numpy!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>min value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.getName">
+<span class="sig-name descname"><span class="pre">getName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.getName" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the name of the ScalarField.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ScalarField name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.getValue">
+<span class="sig-name descname"><span class="pre">getValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cloudComPy.ScalarField.getValue" title="Permalink to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>getValue(self: _cloudComPy.ScalarField, arg0: int) -&gt; float</p></li>
+</ol>
+<p>Returns the ScalarField value at a given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value at index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>getValue(self: _cloudComPy.ScalarField, arg0: int) -&gt; float</p></li>
+</ol>
+<p>Returns the ScalarField value at a given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – the index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value at index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.reserveSafe">
+<span class="sig-name descname"><span class="pre">reserveSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.reserveSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Reserves memory (no exception thrown).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of elements to reserve in the ScalarField</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.resizeSafe">
+<span class="sig-name descname"><span class="pre">resizeSafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.resizeSafe" title="Permalink to this definition"></a></dt>
+<dd><p>Resizes memory (no exception thrown).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count</strong> (<em>int</em>) – number of elements to keep/reserve in the ScalarField</p></li>
+<li><p><strong>init</strong> (<em>bool</em>) – whether to initialize new elements</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – value for new elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.setName">
+<span class="sig-name descname"><span class="pre">setName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.setName" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the name of the ScalarField. No control is done on the uniqueness of the name.
+It is your responsability to ensure this uniqueness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – new name for the ScalarField</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.setValue">
+<span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.setValue" title="Permalink to this definition"></a></dt>
+<dd><p>Set the value at the given index.</p>
+<p><strong>No check on index validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – index in the ScalarField</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – value to set at index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.swap">
+<span class="sig-name descname"><span class="pre">swap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.swap" title="Permalink to this definition"></a></dt>
+<dd><p>Swap values between two indices.</p>
+<p><strong>No check on indices validity!</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index1</strong> (<em>int</em>) – first index</p></li>
+<li><p><strong>index2</strong> (<em>int</em>) – second index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.toNpArray">
+<span class="sig-name descname"><span class="pre">toNpArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.toNpArray" title="Permalink to this definition"></a></dt>
+<dd><p>Wrap the ScalarField data into a numpy Array.</p>
+<p>Returns a numpy array: a one dimension array of (number of Points).
+Data is not copied, the numpy array object does not own the data.</p>
+<p><strong>WARNING</strong> No automatic action on the Python side on the variables referencing the C++ object in case of destruction!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>numpy Array pointing to the ScalarField data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ScalarField.toNpArrayCopy">
+<span class="sig-name descname"><span class="pre">toNpArrayCopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ScalarField" title="_cloudComPy.ScalarField"><span class="pre">_cloudComPy.ScalarField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#cloudComPy.ScalarField.toNpArrayCopy" title="Permalink to this definition"></a></dt>
+<dd><p>Wrap the ScalarField data into a numpy Array.</p>
+<p>Returns a numpy array: a one dimension array of (number of Points).
+Data is copied, the numpy array object owns its data.
+Ownership is transfered to Python:
+the numpy array object and its data will be handled by the Python Garbage Collector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>numpy Array with data copied from the ScalarField data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="color-scales-for-scalar-fields">
+<h2><span class="section-number">9.3. </span>color scales for scalar fields<a class="headerlink" href="#color-scales-for-scalar-fields" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.</span></span><span class="sig-name descname"><span class="pre">ccColorScale</span></span><a class="headerlink" href="#cloudComPy.ccColorScale" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A color scale is defined by several ‘steps’ corresponding to given colors.
+The color between each step is linearly interpolated. A valid color scale
+must have at least 2 steps, one at relative position 0.0 (scale start) and
+one at relative position 1.0 (scale end). Steps can’t be defined outside
+this interval.
+For faster access, an array of interpolated colors is maintained internally.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.Create">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QString</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></span><a class="headerlink" href="#cloudComPy.ccColorScale.Create" title="Permalink to this definition"></a></dt>
+<dd><p>Static method to create a new color scale.</p>
+<p>Steps must be defined with the insert method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>string</em>) – the scale name</p></li>
+<li><p><strong>Uuid</strong> (<em>string</em><em>,</em><em>optional</em>) – a unique Id for the scale. default empty, automatically generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new scale</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cloudComPy.ccColorScale" title="cloudComPy.ccColorScale">ccColorScale</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cloudComPy.ccColorScale.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.getName">
+<span class="sig-name descname"><span class="pre">getName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QString</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScale.getName" title="Permalink to this definition"></a></dt>
+<dd><p>Get the scale name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the scale name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.getUuid">
+<span class="sig-name descname"><span class="pre">getUuid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QString</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScale.getUuid" title="Permalink to this definition"></a></dt>
+<dd><p>Get the scale unique Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the unique Id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.insert">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="colors.html#cloudComPy.QColor" title="_cloudComPy.QColor"><span class="pre">_cloudComPy.QColor</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScale.insert" title="Permalink to this definition"></a></dt>
+<dd><p>Insert a color step, with a relative position between 0 and 1, and the associated color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_position</strong> (<em>float</em>) – relative position between 0 and 1</p></li>
+<li><p><strong>color</strong> (<a class="reference internal" href="colors.html#cloudComPy.QColor" title="cloudComPy.QColor"><em>QColor</em></a>) – the color associated to the step</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScale.setName">
+<span class="sig-name descname"><span class="pre">setName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QString</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScale.setName" title="Permalink to this definition"></a></dt>
+<dd><p>Set the Scale name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em>) – the new scale name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.</span></span><span class="sig-name descname"><span class="pre">ccColorScalesManager</span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>ccColorScale container and manager, useful to get the defaults color scales.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.GetUniqueInstance">
+<span class="sig-name descname"><span class="pre">GetUniqueInstance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.GetUniqueInstance" title="Permalink to this definition"></a></dt>
+<dd><p>Get the Unique instance of the ccColorScalesManager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the Unique instance of the ccColorScalesManager</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="cloudComPy.ccColorScalesManager">ccColorScalesManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.addScale">
+<span class="sig-name descname"><span class="pre">addScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.addScale" title="Permalink to this definition"></a></dt>
+<dd><p>Add a new color scale.</p>
+<p>This operation is only useful to store the color scale in the container
+if you want to save it to persistent settings (not yet working properly).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scale</strong> (<a class="reference internal" href="#cloudComPy.ccColorScale" title="cloudComPy.ccColorScale"><em>ccColorScale</em></a>) – the color scale to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.getDefaultScale">
+<span class="sig-name descname"><span class="pre">getDefaultScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES" title="_cloudComPy.DEFAULT_SCALES"><span class="pre">_cloudComPy.DEFAULT_SCALES</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.getDefaultScale" title="Permalink to this definition"></a></dt>
+<dd><p>Get one of the default color scales.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scale</strong> (<a class="reference internal" href="#cloudComPy.DEFAULT_SCALES" title="cloudComPy.DEFAULT_SCALES"><em>DEFAULT_SCALES</em></a>) – the color scale id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the color scale</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cloudComPy.ccColorScale" title="cloudComPy.ccColorScale">ccColorScale</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.getScale">
+<span class="sig-name descname"><span class="pre">getScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QString</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cloudComPy.ccColorScale" title="_cloudComPy.ccColorScale"><span class="pre">_cloudComPy.ccColorScale</span></a></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.getScale" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a color scale with its universal Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>UUID</strong> (<em>string</em>) – the universal Id of the color scale to find</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the color scale</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cloudComPy.ccColorScale" title="cloudComPy.ccColorScale">ccColorScale</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.removeScale">
+<span class="sig-name descname"><span class="pre">removeScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QString</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.removeScale" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a Color scale from the container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>UUID</strong> (<em>string</em>) – the universal Id of the color scale to remove</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.ccColorScalesManager.toPersistentSettings">
+<span class="sig-name descname"><span class="pre">toPersistentSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.ccColorScalesManager" title="_cloudComPy.ccColorScalesManager"><span class="pre">_cloudComPy.ccColorScalesManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.ccColorScalesManager.toPersistentSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Save custom color scales to persistent settings (not yet working properly).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cloudComPy.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_SCALES</span></span><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES" title="Permalink to this definition"></a></dt>
+<dd><p>There are 16 predefined color scales</p>
+<p>Members:</p>
+<blockquote>
+<div><p>BGYR</p>
+<p>GREY</p>
+<p>BWR</p>
+<p>RY</p>
+<p>RW</p>
+<p>ABS_NORM_GREY</p>
+<p>HSV_360_DEG</p>
+<p>VERTEX_QUALITY</p>
+<p>DIP_BRYW</p>
+<p>DIP_DIR_REPEAT</p>
+<p>VIRIDIS</p>
+<p>BROWN_YELLOW</p>
+<p>YELLOW_BROWN</p>
+<p>TOPO_LANDSERF</p>
+<p>HIGH_CONTRAST</p>
+<p>CIVIDIS</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.ABS_NORM_GREY">
+<span class="sig-name descname"><span class="pre">ABS_NORM_GREY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.ABS_NORM_GREY:</span> <span class="pre">5&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.ABS_NORM_GREY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.BGYR">
+<span class="sig-name descname"><span class="pre">BGYR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.BGYR:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.BGYR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.BROWN_YELLOW">
+<span class="sig-name descname"><span class="pre">BROWN_YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.BROWN_YELLOW:</span> <span class="pre">11&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.BROWN_YELLOW" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.BWR">
+<span class="sig-name descname"><span class="pre">BWR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.BWR:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.BWR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.CIVIDIS">
+<span class="sig-name descname"><span class="pre">CIVIDIS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.CIVIDIS:</span> <span class="pre">15&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.CIVIDIS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.DIP_BRYW">
+<span class="sig-name descname"><span class="pre">DIP_BRYW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.DIP_BRYW:</span> <span class="pre">8&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.DIP_BRYW" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.DIP_DIR_REPEAT">
+<span class="sig-name descname"><span class="pre">DIP_DIR_REPEAT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.DIP_DIR_REPEAT:</span> <span class="pre">9&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.DIP_DIR_REPEAT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.GREY">
+<span class="sig-name descname"><span class="pre">GREY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.GREY:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.GREY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.HIGH_CONTRAST">
+<span class="sig-name descname"><span class="pre">HIGH_CONTRAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.HIGH_CONTRAST:</span> <span class="pre">14&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.HIGH_CONTRAST" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.HSV_360_DEG">
+<span class="sig-name descname"><span class="pre">HSV_360_DEG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.HSV_360_DEG:</span> <span class="pre">6&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.HSV_360_DEG" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.RW">
+<span class="sig-name descname"><span class="pre">RW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.RW:</span> <span class="pre">4&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.RW" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.RY">
+<span class="sig-name descname"><span class="pre">RY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.RY:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.RY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.TOPO_LANDSERF">
+<span class="sig-name descname"><span class="pre">TOPO_LANDSERF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.TOPO_LANDSERF:</span> <span class="pre">13&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.TOPO_LANDSERF" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.VERTEX_QUALITY">
+<span class="sig-name descname"><span class="pre">VERTEX_QUALITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.VERTEX_QUALITY:</span> <span class="pre">7&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.VERTEX_QUALITY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.VIRIDIS">
+<span class="sig-name descname"><span class="pre">VIRIDIS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.VIRIDIS:</span> <span class="pre">10&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.VIRIDIS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.YELLOW_BROWN">
+<span class="sig-name descname"><span class="pre">YELLOW_BROWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DEFAULT_SCALES.YELLOW_BROWN:</span> <span class="pre">12&gt;</span></em><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.YELLOW_BROWN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cloudComPy.DEFAULT_SCALES" title="_cloudComPy.DEFAULT_SCALES"><span class="pre">_cloudComPy.DEFAULT_SCALES</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cloudComPy.DEFAULT_SCALES.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#cloudComPy.DEFAULT_SCALES.value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ccSensor.html" class="btn btn-neutral float-left" title="8. Sensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DistanceComputationTools.html" class="btn btn-neutral float-right" title="10. Distance Computation Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Paul RASCLE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
