@@ -1,0 +1,66 @@
+IfcDistributionControlElement: 
+ - IfcActuator 
+ - IfcAlarm 
+ - IfcController 
+ - IfcFlowInstrument
+ - IfcProtectiveDeviceTrippingUnit
+ - IfcSensor
+IfcEnergyConversionDevice: 
+ - IfcAirToAirHeatRecovery
+ - IfcBoiler
+ - IfcBurner
+ - IfcChiller
+ - IfcCoil
+ - IfcCondenser
+ - IfcCooledBeam
+ - IfcElectricGenerator
+ - IfcElectricMotor
+ - IfcEngine
+ - IfcEvaporativeCooler
+ - IfcEvaporator
+ - IfcHeatExchanger
+ - IfcHumidifier
+ - IfcMotorConnection
+ - IfcSolarDevice
+ - IfcTransformer
+ - IfcTubeBundle
+ - IfcUnitaryEquipment
+IfcFlowController: 
+ - IfcAirTerminalBox 
+ - IfcFlowMeter 
+ - IfcSwitchingDevice
+IfcFlowMovingDevice: 
+ - IfcCompressor
+ - IfcFan
+ - IfcPump
+IfcFlowStorageDevice: 
+  - IfcElectricFlowStorageDevice 
+  - IfcTank
+IfcFlowTerminal: 
+- IfcAudioVisualAppliance
+ - IfcCommunicationsAppliance
+ - IfcElectricAppliance
+ - IfcLamp
+ - IfcMedicalDevice
+ - IfcOutlet
+ - IfcSpaceHeater
+ - IfcStackTerminal
+ - IfcWasteTerminal
+IfcFlowTreatmentDevice:
+  - IfcInterceptor
+IfcElementComponent: 
+ - IfcBuildingElementPart
+ - IfcDiscreteAccessory
+ - IfcFastener
+ - IfcMechanicalFastener
+ - IfcReinforcingElement
+IfcReinforcingElement: 
+ - IfcReinforcingBar
+ - IfcReinforcingMesh
+ - IfcTendon
+ - IfcTendonAnchor
+IfcFurnishingElement:  
+ - IfcFurniture  
+ - IfcSystemFurnitureElement
+IfcWall:
+  - IfcWallStandardCase
