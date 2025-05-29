@@ -41,6 +41,16 @@ The following summarizes the classification performance (F1-score) of various ba
 
 ---
 
+## 🔗 Training RGCN with Graph Input
+
+Before training the RGCN model using the Graph input, you must copy the REVERSE_IFCSchemaGraph.bin file from the data directory into the graph data directory of each instance to be used. This file contains the reverse IFC schema graph and is required for the model to correctly interpret heterogeneous structures during training.
+
+We provide a utility script utils/file_copy_delete.py to automate this process. Run the script before training to broadcast the file to all instance-level graph directories.
+
+If this step is skipped, the model may fail to load the necessary schema structure, resulting in errors or invalid training behavior.
+
+---
+
 ## 📚 Citation
 
 If you use BIMCompNet in your research, please cite our work using the formats provided on the [official dataset website](https://bimcompnet-606lab.xaut.edu.cn/#citation).
