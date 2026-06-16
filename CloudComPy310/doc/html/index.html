@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cloudComPy: a Python interface for CloudCompare &mdash; cloudComPy 2.12a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. cloudComPy: a first example" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            cloudComPy
+          </a>
+              <div class="version">
+                2.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. cloudComPy: a first example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. license</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy User Manual: basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userIntro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userLoad.html">2. Loading clouds and other entities from files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userSave.html">3. Saving Clouds and other entities to files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userEntities.html">4. Clouds, meshes, scalar fields: introspection, manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userNumpy.html">5. operations on coordinates, scalar fields, colors, normals, meshes with Numpy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Some use cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html">1. Create a point cloud with numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cut-a-cloud-or-a-mesh-with-a-polyline">2. Cut a cloud or a mesh with a polyline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distances-between-clouds-and-meshes">3. Compute distances between clouds and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-registration">4. Cloud registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-triangulation-create-a-mesh">5. Cloud triangulation: create a mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#fitting-ccplane">6. Fitting ccPlane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#searching-points-in-neighbourhood">7. Searching points in neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-sampling-noise-filter-filter-by-scalar-field">8. Cloud sampling, noise filter, filter by scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#generate-histograms">9. Generate histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-a-2-5d-volume">10. Compute a 2.5D volume</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-rasterization">11. Cloud rasterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#interpolate-scalar-fields-from-one-cloud-to-another">12. Interpolate scalar fields from one cloud to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-an-optimal-bounding-box">13. Finding an optimal bounding box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#working-with-quaternions-for-rotations">14. Working with quaternions for rotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-comparison-with-plugin-m3c2">15. Cloud comparison with plugin M3C2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#shadevis-ambiant-occlusion-with-plugin-pcv">16. ShadeVIS (ambiant occlusion) with Plugin PCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-hidden-point-removal-with-plugin-hpr">17. Compute Hidden Point Removal with plugin HPR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#boolean-operations-on-meshes-with-plugin-meshboolean-or-plugin-cork">18. Boolean operations on meshes with plugin MeshBoolean or plugin Cork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-primitives-on-a-cloud-with-plugin-ransac-sd">19. Finding primitives on a cloud with plugin RANSAC-SD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-cloth-simulation-filter-on-a-cloud-with-csf-plugin">20. Compute Cloth Simulation Filter on a cloud with CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#classify-a-point-cloud-with-canupo-plugin-and-a-trained-classifier">21. Classify a point cloud with Canupo plugin and a trained classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distance-between-a-cloud-and-a-surface-of-revolution-with-sra-plugin">22. Compute distance between a cloud and a surface of revolution, with SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#surface-mesh-reconstruction-with-poisson-reconstruction-plugin">23. Surface Mesh reconstruction, with Poisson Reconstruction plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#sclices-and-contours">24. Sclices and contours</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-sections-generate-cloud-slices-and-profiles">25. Extract Sections (generate cloud slices and profiles)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-or-label-connected-components">26. Extract or Label Connected Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#merge-several-entities-clouds-or-meshes">27. Merge several entities (clouds or meshes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#avoid-memory-leaks-in-an-iterative-process">28. Avoid memory leaks in an iterative process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#render-a-3d-scene-to-an-image-file">29. Render a 3D scene to an image file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#choosing-a-specific-color-scale-for-a-scalar-field-rendering">30. choosing a specific color scale for a scalar field rendering</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">cloudComPy Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloudComPy.html">1. cloudComPy module, functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPointCloud.html">2. Points Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPolyline.html">3. Polylines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccOctree.html">4. Octrees, descriptors and neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccMesh.html">5. Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html">6. ccPrimitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html#transformations">7. transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccSensor.html">8. Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ScalarField.html">9. Scalar Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DistanceComputationTools.html">10. Distance Computation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeometricalAnalysisTools.html">11. Geometrical Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudSamplingTools.html">12. Cloud Sampling Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccFacet.html">13. 2D Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Neighbourhood.html">14. Neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">15. Colors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">plugins Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Canupo.html">1. Canupo plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSF.html">2. CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HPR.html">3. HPR plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3C2.html">4. M3C2 plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MeshBoolean.html">5. MeshBoolean plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCL.html">6. PCL plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCV.html">7. PCV plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoissonRecon.html">8. PoissonRecon plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RANSAC_SD.html">9. RANSAC_SD plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SRA.html">10. SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MinimalBoundingBox.html">11. minimalBoundingBox Python plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices and tables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">1. general index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html#module-index">2. module index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">cloudComPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cloudComPy: a Python interface for CloudCompare</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloudcompy-a-python-interface-for-cloudcompare">
+<h1>cloudComPy: a Python interface for CloudCompare<a class="headerlink" href="#cloudcompy-a-python-interface-for-cloudcompare" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. cloudComPy: a first example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">2. license</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">cloudComPy User Manual: basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userIntro.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userIntro.html#set-the-cloudcompy-environment">1.1. Set the CloudComPy environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userIntro.html#windows">1.1.1. Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userIntro.html#linux">1.1.2. Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userIntro.html#macos">1.1.3. macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userIntro.html#python3-cloudcompy-import">1.2. Python3: CloudComPy import</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userLoad.html">2. Loading clouds and other entities from files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userLoad.html#known-formats">2.1. Known formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userLoad.html#load-without-explicit-shift-parameters">2.2. Load without explicit shift parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userLoad.html#loading-a-point-cloud">2.2.1. Loading a point cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userLoad.html#loading-a-mesh">2.2.2. Loading a mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userLoad.html#loading-a-polyline">2.2.3. Loading a polyline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userLoad.html#loading-a-file-containing-several-entities">2.2.4. Loading a file containing several entities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userLoad.html#select-the-scans-to-load-in-a-e57-file">2.3. Select the scans to load in a <code class="docutils literal notranslate"><span class="pre">.E57</span></code> file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userLoad.html#loading-the-file-structure">2.3.1. Loading the file structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userLoad.html#getting-the-shift-value">2.4. Getting the shift value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userLoad.html#load-with-explicit-shift-parameters">2.5. Load with explicit shift parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userSave.html">3. Saving Clouds and other entities to files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userSave.html#known-formats">3.1. Known formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userSave.html#saving-a-point-cloud">3.2. Saving a Point Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userSave.html#saving-a-mesh">3.3. Saving a mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userSave.html#saving-several-entities-in-one-file">3.4. Saving several entities in one file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userEntities.html">4. Clouds, meshes, scalar fields: introspection, manipulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#clouds-and-scalar-fields">4.1. Clouds and scalar fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cloud-introspection">4.1.1. cloud introspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cloud-transformations">4.1.2. cloud transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cloud-copy-destruction">4.1.3. cloud copy, destruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cloud-normals">4.1.4. cloud normals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cloud-colors">4.1.5. cloud colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#scalar-fields">4.1.6. scalar fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#sensors">4.1.7. sensors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#meshes">4.2. meshes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#create-a-mesh-from-a-cloud">4.2.1. create a mesh from a cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#meshes-introspection">4.2.2. meshes introspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#meshes-modifications">4.2.3. meshes modifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#generate-a-cloud-from-a-mesh">4.2.4. Generate a cloud from a mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#mesh-copy-destruction">4.2.5. mesh copy, destruction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#primitives">4.3. primitives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#box">4.3.1. Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cone">4.3.2. Cone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#cylinder">4.3.3. Cylinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#plane">4.3.4. Plane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#quadric">4.3.5. Quadric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#sphere">4.3.6. Sphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#torus">4.3.7. Torus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEntities.html#dish">4.3.8. Dish</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#polylines">4.4. polylines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#d-polygons-facets">4.5. 2D polygons (facets)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userEntities.html#octrees">4.6. octrees</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userNumpy.html">5. operations on coordinates, scalar fields, colors, normals, meshes with Numpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#read-modify-or-create-cloud-coordinates-with-numpy">5.1. Read, modify or create cloud coordinates with Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#read-modify-or-create-a-scalar-field-with-numpy">5.2. Read, modify or create a scalar field with Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#an-example-of-point-cloud-with-scalar-field-created-from-numpy-arrays">5.3. An example of point cloud with scalar field created from Numpy arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#access-to-the-indexes-of-triangles-nodes-in-a-mesh">5.4. Access to the indexes of triangles nodes in a mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#access-to-the-array-of-colors-in-cloud">5.5. Access to the array of colors in cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userNumpy.html#read-modify-or-create-normals-with-numpy">5.6. Read, modify or create normals with Numpy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Some use cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html">1. Create a point cloud with numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cut-a-cloud-or-a-mesh-with-a-polyline">2. Cut a cloud or a mesh with a polyline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#cut-a-cloud-with-a-polyline">2.1. Cut a cloud with a polyline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#cut-a-mesh-with-a-polyline">2.2. Cut a mesh with a polyline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distances-between-clouds-and-meshes">3. Compute distances between clouds and meshes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#compute-distances-between-a-cloud-and-a-mesh-c2m">3.1. Compute distances between a cloud and a mesh (C2M)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#compute-distances-between-two-clouds-c2c">3.2. Compute distances between two clouds (C2C)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#compute-split-distances-between-two-clouds-c2c">3.3. Compute split distances between two clouds (C2C)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-registration">4. Cloud registration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#cloud-registration-with-the-cloudcompare-implementation-of-icp-algorithm">4.1. Cloud registration with the CloudCompare implementation of ICP algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#cloud-registration-with-the-pcl-plugin">4.2. Cloud registration with the PCL plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-triangulation-create-a-mesh">5. Cloud triangulation: create a mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#fitting-ccplane">6. Fitting ccPlane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#searching-points-in-neighbourhood">7. Searching points in neighbourhood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-sampling-noise-filter-filter-by-scalar-field">8. Cloud sampling, noise filter, filter by scalar field</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#noise-filter">8.1. Noise filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#resample-cloud-spatially">8.2. Resample cloud spatially</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#subsample-cloud-randomly">8.3. Subsample cloud randomly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#resample-cloud-with-octree-at-level">8.4. resample cloud with octree at level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#resample-cloud-with-octree">8.5. resample cloud with octree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#statistical-outliers-removal-sor-filter">8.6. Statistical Outliers Removal (SOR) filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#subsample-cloud-with-octree-at-level">8.7. subsample cloud with octree at level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#subsample-cloud-with-octree">8.8. subsample cloud with octree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#filter-by-scalar-field-values">8.9. filter by scalar field values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#generate-histograms">9. Generate histograms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#histogram-as-a-figure">9.1. histogram as a figure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userUseCases.html#histogram-as-a-csv-file">9.2. histogram as a csv file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-a-2-5d-volume">10. Compute a 2.5D volume</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-rasterization">11. Cloud rasterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#interpolate-scalar-fields-from-one-cloud-to-another">12. Interpolate scalar fields from one cloud to another</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-an-optimal-bounding-box">13. Finding an optimal bounding box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#working-with-quaternions-for-rotations">14. Working with quaternions for rotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#cloud-comparison-with-plugin-m3c2">15. Cloud comparison with plugin M3C2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#shadevis-ambiant-occlusion-with-plugin-pcv">16. ShadeVIS (ambiant occlusion) with Plugin PCV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-hidden-point-removal-with-plugin-hpr">17. Compute Hidden Point Removal with plugin HPR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#boolean-operations-on-meshes-with-plugin-meshboolean-or-plugin-cork">18. Boolean operations on meshes with plugin MeshBoolean or plugin Cork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#finding-primitives-on-a-cloud-with-plugin-ransac-sd">19. Finding primitives on a cloud with plugin RANSAC-SD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-cloth-simulation-filter-on-a-cloud-with-csf-plugin">20. Compute Cloth Simulation Filter on a cloud with CSF plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#classify-a-point-cloud-with-canupo-plugin-and-a-trained-classifier">21. Classify a point cloud with Canupo plugin and a trained classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#compute-distance-between-a-cloud-and-a-surface-of-revolution-with-sra-plugin">22. Compute distance between a cloud and a surface of revolution, with SRA plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#surface-mesh-reconstruction-with-poisson-reconstruction-plugin">23. Surface Mesh reconstruction, with Poisson Reconstruction plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#sclices-and-contours">24. Sclices and contours</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-sections-generate-cloud-slices-and-profiles">25. Extract Sections (generate cloud slices and profiles)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#extract-or-label-connected-components">26. Extract or Label Connected Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#merge-several-entities-clouds-or-meshes">27. Merge several entities (clouds or meshes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#avoid-memory-leaks-in-an-iterative-process">28. Avoid memory leaks in an iterative process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#render-a-3d-scene-to-an-image-file">29. Render a 3D scene to an image file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userUseCases.html#choosing-a-specific-color-scale-for-a-scalar-field-rendering">30. choosing a specific color scale for a scalar field rendering</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">cloudComPy Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloudComPy.html">1. cloudComPy module, functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeApproxLocalDensity"><code class="docutils literal notranslate"><span class="pre">computeApproxLocalDensity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeCurvature"><code class="docutils literal notranslate"><span class="pre">computeCurvature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeFeature"><code class="docutils literal notranslate"><span class="pre">computeFeature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeLocalDensity"><code class="docutils literal notranslate"><span class="pre">computeLocalDensity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeMomentOrder1"><code class="docutils literal notranslate"><span class="pre">computeMomentOrder1()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeNormals"><code class="docutils literal notranslate"><span class="pre">computeNormals()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.computeRoughness"><code class="docutils literal notranslate"><span class="pre">computeRoughness()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ComputeVolume25D"><code class="docutils literal notranslate"><span class="pre">ComputeVolume25D()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.deleteEntity"><code class="docutils literal notranslate"><span class="pre">deleteEntity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExtractConnectedComponents"><code class="docutils literal notranslate"><span class="pre">ExtractConnectedComponents()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.extractPointsAlongSections"><code class="docutils literal notranslate"><span class="pre">extractPointsAlongSections()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExtractSlicesAndContours"><code class="docutils literal notranslate"><span class="pre">ExtractSlicesAndContours()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.filterBySFValue"><code class="docutils literal notranslate"><span class="pre">filterBySFValue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.GetPointCloudRadius"><code class="docutils literal notranslate"><span class="pre">GetPointCloudRadius()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.getScalarType"><code class="docutils literal notranslate"><span class="pre">getScalarType()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICP"><code class="docutils literal notranslate"><span class="pre">ICP()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.importFile"><code class="docutils literal notranslate"><span class="pre">importFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.initCC"><code class="docutils literal notranslate"><span class="pre">initCC()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.initCloudCompare"><code class="docutils literal notranslate"><span class="pre">initCloudCompare()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolateScalarFieldsFrom"><code class="docutils literal notranslate"><span class="pre">interpolateScalarFieldsFrom()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.invertNormals"><code class="docutils literal notranslate"><span class="pre">invertNormals()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginCanupo"><code class="docutils literal notranslate"><span class="pre">isPluginCanupo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginCSF"><code class="docutils literal notranslate"><span class="pre">isPluginCSF()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginCork"><code class="docutils literal notranslate"><span class="pre">isPluginCork()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginDraco"><code class="docutils literal notranslate"><span class="pre">isPluginDraco()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginFbx"><code class="docutils literal notranslate"><span class="pre">isPluginFbx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginHPR"><code class="docutils literal notranslate"><span class="pre">isPluginHPR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginM3C2"><code class="docutils literal notranslate"><span class="pre">isPluginM3C2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginMeshBoolean"><code class="docutils literal notranslate"><span class="pre">isPluginMeshBoolean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginPCL"><code class="docutils literal notranslate"><span class="pre">isPluginPCL()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginPCV"><code class="docutils literal notranslate"><span class="pre">isPluginPCV()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginPoissonRecon"><code class="docutils literal notranslate"><span class="pre">isPluginPoissonRecon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginRANSAC_SD"><code class="docutils literal notranslate"><span class="pre">isPluginRANSAC_SD()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.isPluginSRA"><code class="docutils literal notranslate"><span class="pre">isPluginSRA()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.LabelConnectedComponents"><code class="docutils literal notranslate"><span class="pre">LabelConnectedComponents()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.loadMesh"><code class="docutils literal notranslate"><span class="pre">loadMesh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.loadPointCloud"><code class="docutils literal notranslate"><span class="pre">loadPointCloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.loadPolyline"><code class="docutils literal notranslate"><span class="pre">loadPolyline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.MergeEntities"><code class="docutils literal notranslate"><span class="pre">MergeEntities()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.RasterizeGeoTiffOnly"><code class="docutils literal notranslate"><span class="pre">RasterizeGeoTiffOnly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.RasterizeToCloud"><code class="docutils literal notranslate"><span class="pre">RasterizeToCloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.RasterizeToMesh"><code class="docutils literal notranslate"><span class="pre">RasterizeToMesh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.SaveEntities"><code class="docutils literal notranslate"><span class="pre">SaveEntities()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.SaveMesh"><code class="docutils literal notranslate"><span class="pre">SaveMesh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.SavePointCloud"><code class="docutils literal notranslate"><span class="pre">SavePointCloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setTraces"><code class="docutils literal notranslate"><span class="pre">setTraces()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.unfoldPointsAlongPolylines"><code class="docutils literal notranslate"><span class="pre">unfoldPointsAlongPolylines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.addToRenderScene"><code class="docutils literal notranslate"><span class="pre">addToRenderScene()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.removeFromRenderScene"><code class="docutils literal notranslate"><span class="pre">removeFromRenderScene()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.render"><code class="docutils literal notranslate"><span class="pre">render()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setOrthoView"><code class="docutils literal notranslate"><span class="pre">setOrthoView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setCenteredPerspectiveView"><code class="docutils literal notranslate"><span class="pre">setCenteredPerspectiveView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setViewerPerspectiveView"><code class="docutils literal notranslate"><span class="pre">setViewerPerspectiveView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setGlobalZoom"><code class="docutils literal notranslate"><span class="pre">setGlobalZoom()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.zoomOnSelectedEntity"><code class="docutils literal notranslate"><span class="pre">zoomOnSelectedEntity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setFrontView"><code class="docutils literal notranslate"><span class="pre">setFrontView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setBottomView"><code class="docutils literal notranslate"><span class="pre">setBottomView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setTopView"><code class="docutils literal notranslate"><span class="pre">setTopView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setBackView"><code class="docutils literal notranslate"><span class="pre">setBackView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setLeftView"><code class="docutils literal notranslate"><span class="pre">setLeftView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setRightView"><code class="docutils literal notranslate"><span class="pre">setRightView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setIsoView1"><code class="docutils literal notranslate"><span class="pre">setIsoView1()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setIsoView2"><code class="docutils literal notranslate"><span class="pre">setIsoView2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setCustomView"><code class="docutils literal notranslate"><span class="pre">setCustomView()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setCameraPos"><code class="docutils literal notranslate"><span class="pre">setCameraPos()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setBackgroundColor"><code class="docutils literal notranslate"><span class="pre">setBackgroundColor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setTextDefaultCol"><code class="docutils literal notranslate"><span class="pre">setTextDefaultCol()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.setColorScaleShowHistogram"><code class="docutils literal notranslate"><span class="pre">setColorScaleShowHistogram()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ccBBox"><code class="docutils literal notranslate"><span class="pre">ccBBox</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ccBBox.__init__"><code class="docutils literal notranslate"><span class="pre">ccBBox.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ccBBox.maxCorner"><code class="docutils literal notranslate"><span class="pre">ccBBox.maxCorner()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ccBBox.minCorner"><code class="docutils literal notranslate"><span class="pre">ccBBox.minCorner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.X"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.X</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.Y"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.Y</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.Z"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.Z</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.__init__"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.name"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_DIRECTION.value"><code class="docutils literal notranslate"><span class="pre">CC_DIRECTION.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_BAD_ARGUMENT"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_BAD_ARGUMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_BAD_ENTITY_TYPE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_BAD_ENTITY_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_BROKEN_DEPENDENCY_ERROR"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_BROKEN_DEPENDENCY_ERROR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_CANCELED_BY_USER"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_CANCELED_BY_USER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_CONSOLE_ERROR"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_CONSOLE_ERROR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_FILE_WAS_WRITTEN_BY_UNKNOWN_PLUGIN"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_FILE_WAS_WRITTEN_BY_UNKNOWN_PLUGIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_MALFORMED_FILE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_MALFORMED_FILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_NOT_ENOUGH_MEMORY"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_NOT_ENOUGH_MEMORY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_NOT_IMPLEMENTED"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_NOT_IMPLEMENTED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_NO_ERROR"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_NO_ERROR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_NO_LOAD"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_NO_LOAD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_NO_SAVE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_NO_SAVE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_READING"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_READING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_THIRD_PARTY_LIB_EXCEPTION"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_THIRD_PARTY_LIB_EXCEPTION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_THIRD_PARTY_LIB_FAILURE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_THIRD_PARTY_LIB_FAILURE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_UNKNOWN_FILE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_UNKNOWN_FILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_WRITING"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_WRITING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.CC_FERR_WRONG_FILE_TYPE"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.CC_FERR_WRONG_FILE_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.__init__"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.name"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_FILE_ERROR.value"><code class="docutils literal notranslate"><span class="pre">CC_FILE_ERROR.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.AUTO"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.AUTO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.FIRST_GLOBAL_SHIFT"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.FIRST_GLOBAL_SHIFT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.NO_GLOBAL_SHIFT"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.NO_GLOBAL_SHIFT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.XYZ"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.XYZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.__init__"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.name"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CC_SHIFT_MODE.value"><code class="docutils literal notranslate"><span class="pre">CC_SHIFT_MODE.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType"><code class="docutils literal notranslate"><span class="pre">CurvatureType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.GAUSSIAN_CURV"><code class="docutils literal notranslate"><span class="pre">CurvatureType.GAUSSIAN_CURV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.MEAN_CURV"><code class="docutils literal notranslate"><span class="pre">CurvatureType.MEAN_CURV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.NORMAL_CHANGE_RATE"><code class="docutils literal notranslate"><span class="pre">CurvatureType.NORMAL_CHANGE_RATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.__init__"><code class="docutils literal notranslate"><span class="pre">CurvatureType.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.name"><code class="docutils literal notranslate"><span class="pre">CurvatureType.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CurvatureType.value"><code class="docutils literal notranslate"><span class="pre">CurvatureType.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.FILL_AVERAGE_HEIGHT"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_AVERAGE_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.FILL_CUSTOM_HEIGHT"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_CUSTOM_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.FILL_MAXIMUM_HEIGHT"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_MAXIMUM_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.FILL_MINIMUM_HEIGHT"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_MINIMUM_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.INTERPOLATE_DELAUNAY"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.INTERPOLATE_DELAUNAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.KRIGING"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.KRIGING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.LEAVE_EMPTY"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.LEAVE_EMPTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.__init__"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.name"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.EmptyCellFillOption.value"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields"><code class="docutils literal notranslate"><span class="pre">ExportableFields</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_AVG_HEIGHT"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_AVG_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_COUNT"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_COUNT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_HEIGHT"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_HEIGHT_RANGE"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_HEIGHT_RANGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_HEIGHT_STD_DEV"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_HEIGHT_STD_DEV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_INVALID"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_INVALID</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_MAX_HEIGHT"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_MAX_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.PER_CELL_MIN_HEIGHT"><code class="docutils literal notranslate"><span class="pre">ExportableFields.PER_CELL_MIN_HEIGHT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.__init__"><code class="docutils literal notranslate"><span class="pre">ExportableFields.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.name"><code class="docutils literal notranslate"><span class="pre">ExportableFields.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ExportableFields.value"><code class="docutils literal notranslate"><span class="pre">ExportableFields.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres"><code class="docutils literal notranslate"><span class="pre">ICPres</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.__init__"><code class="docutils literal notranslate"><span class="pre">ICPres.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.aligned"><code class="docutils literal notranslate"><span class="pre">ICPres.aligned</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.finalPointCount"><code class="docutils literal notranslate"><span class="pre">ICPres.finalPointCount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.finalRMS"><code class="docutils literal notranslate"><span class="pre">ICPres.finalRMS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.finalScale"><code class="docutils literal notranslate"><span class="pre">ICPres.finalScale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ICPres.transMat"><code class="docutils literal notranslate"><span class="pre">ICPres.transMat</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.__init__"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.algos"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.algos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.knn"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.knn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.method"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.method</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.radius"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.radius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.interpolatorParameters.sigma"><code class="docutils literal notranslate"><span class="pre">interpolatorParameters.sigma</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.LS"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.LS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.NO_MODEL"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.NO_MODEL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.QUADRIC"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.QUADRIC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.TRI"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.TRI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.__init__"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.name"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.LOCAL_MODEL_TYPES.value"><code class="docutils literal notranslate"><span class="pre">LOCAL_MODEL_TYPES.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation"><code class="docutils literal notranslate"><span class="pre">Orientation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_BARYCENTER"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_BARYCENTER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_ORIGIN"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_ORIGIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_SENSOR_ORIGIN"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_SENSOR_ORIGIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_X"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_X</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_Y"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_Y</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.MINUS_Z"><code class="docutils literal notranslate"><span class="pre">Orientation.MINUS_Z</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_BARYCENTER"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_BARYCENTER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_ORIGIN"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_ORIGIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_SENSOR_ORIGIN"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_SENSOR_ORIGIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_X"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_X</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_Y"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_Y</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PLUS_Z"><code class="docutils literal notranslate"><span class="pre">Orientation.PLUS_Z</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.PREVIOUS"><code class="docutils literal notranslate"><span class="pre">Orientation.PREVIOUS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.UNDEFINED"><code class="docutils literal notranslate"><span class="pre">Orientation.UNDEFINED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.__init__"><code class="docutils literal notranslate"><span class="pre">Orientation.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.name"><code class="docutils literal notranslate"><span class="pre">Orientation.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.Orientation.value"><code class="docutils literal notranslate"><span class="pre">Orientation.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType"><code class="docutils literal notranslate"><span class="pre">ProjectionType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.INVALID_PROJECTION_TYPE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.INVALID_PROJECTION_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.PROJ_AVERAGE_VALUE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.PROJ_AVERAGE_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.PROJ_INVERSE_VAR_VALUE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.PROJ_INVERSE_VAR_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.PROJ_MAXIMUM_VALUE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.PROJ_MAXIMUM_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.PROJ_MEDIAN_VALUE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.PROJ_MEDIAN_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.PROJ_MINIMUM_VALUE"><code class="docutils literal notranslate"><span class="pre">ProjectionType.PROJ_MINIMUM_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.__init__"><code class="docutils literal notranslate"><span class="pre">ProjectionType.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.name"><code class="docutils literal notranslate"><span class="pre">ProjectionType.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ProjectionType.value"><code class="docutils literal notranslate"><span class="pre">ProjectionType.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.__init__"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.addedVolume"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.addedVolume</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.averageNeighborsPerCell"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.averageNeighborsPerCell</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.ceilNonMatchingPercent"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.ceilNonMatchingPercent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.groundNonMatchingPercent"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.groundNonMatchingPercent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.matchingPercent"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.matchingPercent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.removedVolume"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.removedVolume</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.surface"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.surface</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.ReportInfoVol.volume"><code class="docutils literal notranslate"><span class="pre">ReportInfoVol.volume</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_NONE"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_NONE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_ROTATION"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_ROTATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_RXY"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_RXY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_RXZ"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_RXZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_RYZ"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_RYZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_TRANSLATION"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_TRANSLATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_TX"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_TX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_TY"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_TY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.SKIP_TZ"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.SKIP_TZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.__init__"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.name"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.TRANSFORMATION_FILTERS.value"><code class="docutils literal notranslate"><span class="pre">TRANSFORMATION_FILTERS.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE.MAX_ERROR_CONVERGENCE"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE.MAX_ERROR_CONVERGENCE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE.MAX_ITER_CONVERGENCE"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE.MAX_ITER_CONVERGENCE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE.__init__"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE.name"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudComPy.html#cloudComPy.CONVERGENCE_TYPE.value"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_TYPE.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccPointCloud.html">2. Points Clouds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccPointCloud.html#ccpointcloud">2.1. ccPointCloud</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.ccPointCloud"><code class="docutils literal notranslate"><span class="pre">ccPointCloud</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPointCloud.html#bases-classes-for-points-clouds">2.2. bases classes for Points Clouds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.PointCloudTpl_ccGenericPointCloud_QString"><code class="docutils literal notranslate"><span class="pre">PointCloudTpl_ccGenericPointCloud_QString</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.ccGenericPointCloud"><code class="docutils literal notranslate"><span class="pre">ccGenericPointCloud</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.ReferenceCloud"><code class="docutils literal notranslate"><span class="pre">ReferenceCloud</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.GenericIndexedCloudPersist"><code class="docutils literal notranslate"><span class="pre">GenericIndexedCloudPersist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.ccShiftedObject"><code class="docutils literal notranslate"><span class="pre">ccShiftedObject</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.ccHObject"><code class="docutils literal notranslate"><span class="pre">ccHObject</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.DEPENDENCY_FLAGS"><code class="docutils literal notranslate"><span class="pre">DEPENDENCY_FLAGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPointCloud.html#cloudComPy.CLONE_WARNINGS"><code class="docutils literal notranslate"><span class="pre">CLONE_WARNINGS</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccPolyline.html">3. Polylines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccPolyline.html#ccpolyline">3.1. ccPolyline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPolyline.html#cloudComPy.ccPolyline"><code class="docutils literal notranslate"><span class="pre">ccPolyline</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPolyline.html#bases-classes-for-ccpolyline">3.2. bases classes for ccPolyline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPolyline.html#cloudComPy.Polyline"><code class="docutils literal notranslate"><span class="pre">Polyline</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccOctree.html">4. Octrees, descriptors and neighbourhood</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccOctree.html#octrees">4.1. Octrees</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.DgmOctree"><code class="docutils literal notranslate"><span class="pre">DgmOctree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccOctree.html#descriptors-structures">4.2. Descriptors structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.PointDescriptor"><code class="docutils literal notranslate"><span class="pre">PointDescriptor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.CellDescriptor"><code class="docutils literal notranslate"><span class="pre">CellDescriptor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.IndexAndCode"><code class="docutils literal notranslate"><span class="pre">IndexAndCode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccOctree.html#neighbourhood-structures">4.3. Neighbourhood structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.CylindricalNeighbourhood"><code class="docutils literal notranslate"><span class="pre">CylindricalNeighbourhood</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.ProgressiveCylindricalNeighbourhood"><code class="docutils literal notranslate"><span class="pre">ProgressiveCylindricalNeighbourhood</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.BoxNeighbourhood"><code class="docutils literal notranslate"><span class="pre">BoxNeighbourhood</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccOctree.html#cloudComPy.NearestNeighboursSearchStruct"><code class="docutils literal notranslate"><span class="pre">NearestNeighboursSearchStruct</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccMesh.html">5. Meshes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccMesh.html#ccmesh">5.1. ccMesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccMesh.html#cloudComPy.ccMesh"><code class="docutils literal notranslate"><span class="pre">ccMesh</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccMesh.html#bases-classes-for-meshes">5.2. bases classes for Meshes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccMesh.html#cloudComPy.ccGenericMesh"><code class="docutils literal notranslate"><span class="pre">ccGenericMesh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccMesh.html#cloudComPy.GenericIndexedMesh"><code class="docutils literal notranslate"><span class="pre">GenericIndexedMesh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccMesh.html#cloudComPy.TRIANGULATION_TYPES"><code class="docutils literal notranslate"><span class="pre">TRIANGULATION_TYPES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccMesh.html#cloudComPy.EdgeConnectivityStats"><code class="docutils literal notranslate"><span class="pre">EdgeConnectivityStats</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html">6. ccPrimitives</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#box">6.1. Box</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccBox"><code class="docutils literal notranslate"><span class="pre">ccBox</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#cone">6.2. Cone</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccCone"><code class="docutils literal notranslate"><span class="pre">ccCone</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#cylinder">6.3. Cylinder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccCylinder"><code class="docutils literal notranslate"><span class="pre">ccCylinder</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#plane">6.4. Plane</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccPlane"><code class="docutils literal notranslate"><span class="pre">ccPlane</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#quadric">6.5. Quadric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccQuadric"><code class="docutils literal notranslate"><span class="pre">ccQuadric</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#sphere">6.6. Sphere</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccSphere"><code class="docutils literal notranslate"><span class="pre">ccSphere</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#torus">6.7. Torus</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccTorus"><code class="docutils literal notranslate"><span class="pre">ccTorus</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#dish">6.8. Dish</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccDish"><code class="docutils literal notranslate"><span class="pre">ccDish</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#generic-primitive">6.9. Generic primitive</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGenericPrimitive"><code class="docutils literal notranslate"><span class="pre">ccGenericPrimitive</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccPrimitives.html#transformations">7. transformations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccPrimitives.html#rotation-translation-matrix">7.1. Rotation Translation Matrix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrix"><code class="docutils literal notranslate"><span class="pre">ccGLMatrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrixd"><code class="docutils literal notranslate"><span class="pre">ccGLMatrixd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrixParams1_float"><code class="docutils literal notranslate"><span class="pre">ccGLMatrixParams1_float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrixParams2_float"><code class="docutils literal notranslate"><span class="pre">ccGLMatrixParams2_float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrixParams1_double"><code class="docutils literal notranslate"><span class="pre">ccGLMatrixParams1_double</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccPrimitives.html#cloudComPy.ccGLMatrixParams2_double"><code class="docutils literal notranslate"><span class="pre">ccGLMatrixParams2_double</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccSensor.html">8. Sensor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccSensor.html#ccgblsensor">8.1. ccGBLSensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccSensor.html#cloudComPy.ccGBLSensor"><code class="docutils literal notranslate"><span class="pre">ccGBLSensor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccSensor.html#cloudComPy.ROTATION_ORDER"><code class="docutils literal notranslate"><span class="pre">ROTATION_ORDER</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ccSensor.html#ccsensor">8.2. ccSensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccSensor.html#cloudComPy.ccSensor"><code class="docutils literal notranslate"><span class="pre">ccSensor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccSensor.html#cloudComPy.CC_SENSOR_TYPE"><code class="docutils literal notranslate"><span class="pre">CC_SENSOR_TYPE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ScalarField.html">9. Scalar Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ScalarField.html#ccscalarfield">9.1. ccScalarField</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ScalarField.html#cloudComPy.ccScalarField"><code class="docutils literal notranslate"><span class="pre">ccScalarField</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ScalarField.html#bases-classes-for-ccscalarfield">9.2. bases classes for ccScalarField</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ScalarField.html#cloudComPy.ScalarField"><code class="docutils literal notranslate"><span class="pre">ScalarField</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ScalarField.html#color-scales-for-scalar-fields">9.3. color scales for scalar fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ScalarField.html#cloudComPy.ccColorScale"><code class="docutils literal notranslate"><span class="pre">ccColorScale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScalarField.html#cloudComPy.ccColorScalesManager"><code class="docutils literal notranslate"><span class="pre">ccColorScalesManager</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScalarField.html#cloudComPy.DEFAULT_SCALES"><code class="docutils literal notranslate"><span class="pre">DEFAULT_SCALES</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DistanceComputationTools.html">10. Distance Computation Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DistanceComputationTools.html#distance-computation">10.1. Distance computation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DistanceComputationTools.html#cloudComPy.DistanceComputationTools"><code class="docutils literal notranslate"><span class="pre">DistanceComputationTools</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DistanceComputationTools.html#distance-computation-parameters">10.2. Distance computation parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DistanceComputationTools.html#cloudComPy.Cloud2CloudDistancesComputationParams"><code class="docutils literal notranslate"><span class="pre">Cloud2CloudDistancesComputationParams</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DistanceComputationTools.html#cloudComPy.Cloud2MeshDistancesComputationParams"><code class="docutils literal notranslate"><span class="pre">Cloud2MeshDistancesComputationParams</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GeometricalAnalysisTools.html">11. Geometrical Analysis Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GeometricalAnalysisTools.html#geometrical-analysis">11.1. Geometrical Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GeometricalAnalysisTools.html#cloudComPy.GeometricalAnalysisTools"><code class="docutils literal notranslate"><span class="pre">GeometricalAnalysisTools</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GeometricalAnalysisTools.html#cloudComPy.Density"><code class="docutils literal notranslate"><span class="pre">Density</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GeometricalAnalysisTools.html#cloudComPy.ErrorCode"><code class="docutils literal notranslate"><span class="pre">ErrorCode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloudSamplingTools.html">12. Cloud Sampling Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloudSamplingTools.html#cloud-sampling">12.1. cloud sampling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudSamplingTools.html#cloudComPy.CloudSamplingTools"><code class="docutils literal notranslate"><span class="pre">CloudSamplingTools</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloudSamplingTools.html#cloud-sampling-parameters">12.2. cloud sampling parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloudSamplingTools.html#cloudComPy.SFModulationParams"><code class="docutils literal notranslate"><span class="pre">SFModulationParams</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudSamplingTools.html#cloudComPy.RESAMPLING_CELL_METHOD"><code class="docutils literal notranslate"><span class="pre">RESAMPLING_CELL_METHOD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloudSamplingTools.html#cloudComPy.SUBSAMPLING_CELL_METHOD"><code class="docutils literal notranslate"><span class="pre">SUBSAMPLING_CELL_METHOD</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ccFacet.html">13. 2D Polygons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ccFacet.html#ccfacets">13.1. ccFacets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccFacet.html#cloudComPy.ccFacet"><code class="docutils literal notranslate"><span class="pre">ccFacet</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Neighbourhood.html">14. Neighbourhood</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Neighbourhood.html#id1">14.1. Neighbourhood</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Neighbourhood.html#cloudComPy.GeomFeature"><code class="docutils literal notranslate"><span class="pre">GeomFeature</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">15. Colors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colors.html#qcolor-from-qt">15.1. QColor (from Qt)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="colors.html#cloudComPy.QColor"><code class="docutils literal notranslate"><span class="pre">QColor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="colors.html#other-useful-color-classes-from-qt">15.2. Other Useful Color classes (from Qt)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="colors.html#cloudComPy.QRgba64"><code class="docutils literal notranslate"><span class="pre">QRgba64</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="colors.html#cloudComPy.QColorSpec"><code class="docutils literal notranslate"><span class="pre">QColorSpec</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">plugins Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Canupo.html">1. Canupo plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.Classify"><code class="docutils literal notranslate"><span class="pre">Classify()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.MSC_FILE"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.MSC_FILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.ORIGINAL"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.ORIGINAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.OTHER"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.OTHER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.SUBSAMPLED"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.SUBSAMPLED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.__init__"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.name"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Canupo.html#cloudComPy.Canupo.CORE_CLOUD_SOURCES.value"><code class="docutils literal notranslate"><span class="pre">CORE_CLOUD_SOURCES.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CSF.html">2. CSF plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CSF.html#cloudComPy.CSF.computeCSF"><code class="docutils literal notranslate"><span class="pre">computeCSF()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="CSF.html#cloudComPy.CSF.initTrace_CSF"><code class="docutils literal notranslate"><span class="pre">initTrace_CSF()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="HPR.html">3. HPR plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="HPR.html#cloudComPy.HPR.computeHPR"><code class="docutils literal notranslate"><span class="pre">computeHPR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="HPR.html#cloudComPy.HPR.initTrace_HPR"><code class="docutils literal notranslate"><span class="pre">initTrace_HPR()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="M3C2.html">4. M3C2 plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="M3C2.html#cloudComPy.M3C2.computeM3C2"><code class="docutils literal notranslate"><span class="pre">computeM3C2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="M3C2.html#cloudComPy.M3C2.initTrace_M3C2"><code class="docutils literal notranslate"><span class="pre">initTrace_M3C2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="M3C2.html#cloudComPy.M3C2.M3C2guessParamsToFile"><code class="docutils literal notranslate"><span class="pre">M3C2guessParamsToFile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MeshBoolean.html">5. MeshBoolean plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.DIFF"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.DIFF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.INTERSECT"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.INTERSECT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.SYM_DIFF"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.SYM_DIFF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.UNION"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.UNION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.__init__"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.name"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.CSG_OPERATION.value"><code class="docutils literal notranslate"><span class="pre">CSG_OPERATION.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.computeMeshBoolean"><code class="docutils literal notranslate"><span class="pre">computeMeshBoolean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MeshBoolean.html#cloudComPy.MeshBoolean.initTrace_MeshBoolean"><code class="docutils literal notranslate"><span class="pre">initTrace_MeshBoolean()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PCL.html">6. PCL plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter.__init__"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter.compute"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter.getAutoRadius"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter.getAutoRadius()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter.getTransformation"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter.getTransformation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.FastGlobalRegistrationFilter.setParameters"><code class="docutils literal notranslate"><span class="pre">FastGlobalRegistrationFilter.setParameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PCL.html#cloudComPy.PCL.NormalEstimation"><code class="docutils literal notranslate"><span class="pre">NormalEstimation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.NormalEstimation.__init__"><code class="docutils literal notranslate"><span class="pre">NormalEstimation.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.NormalEstimation.compute"><code class="docutils literal notranslate"><span class="pre">NormalEstimation.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.NormalEstimation.setParameters"><code class="docutils literal notranslate"><span class="pre">NormalEstimation.setParameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PCL.html#cloudComPy.PCL.MLSSmoothingUpsampling"><code class="docutils literal notranslate"><span class="pre">MLSSmoothingUpsampling</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.MLSSmoothingUpsampling.__init__"><code class="docutils literal notranslate"><span class="pre">MLSSmoothingUpsampling.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.MLSSmoothingUpsampling.compute"><code class="docutils literal notranslate"><span class="pre">MLSSmoothingUpsampling.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.MLSSmoothingUpsampling.getOutputCloud"><code class="docutils literal notranslate"><span class="pre">MLSSmoothingUpsampling.getOutputCloud()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PCL.html#cloudComPy.PCL.MLSSmoothingUpsampling.setParameters"><code class="docutils literal notranslate"><span class="pre">MLSSmoothingUpsampling.setParameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PCL.html#cloudComPy.PCL.initTrace_PCL"><code class="docutils literal notranslate"><span class="pre">initTrace_PCL()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PCV.html">7. PCV plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PCV.html#cloudComPy.PCV.computeShadeVIS"><code class="docutils literal notranslate"><span class="pre">computeShadeVIS()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PCV.html#cloudComPy.PCV.initTrace_PCV"><code class="docutils literal notranslate"><span class="pre">initTrace_PCV()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PoissonRecon.html">8. PoissonRecon plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.PR"><code class="docutils literal notranslate"><span class="pre">PR</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.PR.PoissonReconstruction"><code class="docutils literal notranslate"><span class="pre">PR.PoissonReconstruction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.PR.__init__"><code class="docutils literal notranslate"><span class="pre">PR.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType"><code class="docutils literal notranslate"><span class="pre">BoundaryType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.DIRICHLET"><code class="docutils literal notranslate"><span class="pre">BoundaryType.DIRICHLET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.FREE"><code class="docutils literal notranslate"><span class="pre">BoundaryType.FREE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.NEUMANN"><code class="docutils literal notranslate"><span class="pre">BoundaryType.NEUMANN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.__init__"><code class="docutils literal notranslate"><span class="pre">BoundaryType.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.name"><code class="docutils literal notranslate"><span class="pre">BoundaryType.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.BoundaryType.value"><code class="docutils literal notranslate"><span class="pre">BoundaryType.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PoissonRecon.html#cloudComPy.PoissonRecon.initTrace_PoissonRecon"><code class="docutils literal notranslate"><span class="pre">initTrace_PoissonRecon()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RANSAC_SD.html">9. RANSAC_SD plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams"><code class="docutils literal notranslate"><span class="pre">RansacParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.__init__"><code class="docutils literal notranslate"><span class="pre">RansacParams.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.allowFitting"><code class="docutils literal notranslate"><span class="pre">RansacParams.allowFitting</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.allowSimplification"><code class="docutils literal notranslate"><span class="pre">RansacParams.allowSimplification</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.bitmapEpsilon"><code class="docutils literal notranslate"><span class="pre">RansacParams.bitmapEpsilon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.createCloudFromLeftOverPoints"><code class="docutils literal notranslate"><span class="pre">RansacParams.createCloudFromLeftOverPoints</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.epsilon"><code class="docutils literal notranslate"><span class="pre">RansacParams.epsilon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.getPrimEnabled"><code class="docutils literal notranslate"><span class="pre">RansacParams.getPrimEnabled()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxConeAngle_deg"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxConeAngle_deg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxConeLength"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxConeLength</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxConeRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxConeRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxCylinderLength"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxCylinderLength</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxCylinderRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxCylinderRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxNormalDev_deg"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxNormalDev_deg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxSphereRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxSphereRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxTorusMajorRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxTorusMajorRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.maxTorusMinorRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.maxTorusMinorRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.minCylinderRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.minCylinderRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.minSphereRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.minSphereRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.minTorusMajorRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.minTorusMajorRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.minTorusMinorRadius"><code class="docutils literal notranslate"><span class="pre">RansacParams.minTorusMinorRadius</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.optimizeForCloud"><code class="docutils literal notranslate"><span class="pre">RansacParams.optimizeForCloud()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.probability"><code class="docutils literal notranslate"><span class="pre">RansacParams.probability</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.randomColor"><code class="docutils literal notranslate"><span class="pre">RansacParams.randomColor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.setPrimEnabled"><code class="docutils literal notranslate"><span class="pre">RansacParams.setPrimEnabled()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.RansacParams.supportPoints"><code class="docutils literal notranslate"><span class="pre">RansacParams.supportPoints</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.computeRANSAC_SD"><code class="docutils literal notranslate"><span class="pre">computeRANSAC_SD()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="RANSAC_SD.html#cloudComPy.RANSAC_SD.initTrace_RANSAC_SD"><code class="docutils literal notranslate"><span class="pre">initTrace_RANSAC_SD()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SRA.html">10. SRA plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.qSRA"><code class="docutils literal notranslate"><span class="pre">qSRA</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.qSRA.__init__"><code class="docutils literal notranslate"><span class="pre">qSRA.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.qSRA.doComputeRadialDists"><code class="docutils literal notranslate"><span class="pre">qSRA.doComputeRadialDists()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.loadProfile"><code class="docutils literal notranslate"><span class="pre">loadProfile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.exportMapAsCloud"><code class="docutils literal notranslate"><span class="pre">exportMapAsCloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.exportMapAsMesh"><code class="docutils literal notranslate"><span class="pre">exportMapAsMesh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.initTrace_SRA"><code class="docutils literal notranslate"><span class="pre">initTrace_SRA()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType"><code class="docutils literal notranslate"><span class="pre">FillStrategyType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.FILL_STRAT_AVG_DIST"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.FILL_STRAT_AVG_DIST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.FILL_STRAT_MAX_DIST"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.FILL_STRAT_MAX_DIST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.FILL_STRAT_MIN_DIST"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.FILL_STRAT_MIN_DIST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.INVALID_STRATEGY_TYPE"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.INVALID_STRATEGY_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.__init__"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.name"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.FillStrategyType.value"><code class="docutils literal notranslate"><span class="pre">FillStrategyType.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.FILL_INTERPOLATE"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_INTERPOLATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.FILL_WITH_ZERO"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.FILL_WITH_ZERO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.LEAVE_EMPTY"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.LEAVE_EMPTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.__init__"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.name"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SRA.html#cloudComPy.SRA.EmptyCellFillOption.value"><code class="docutils literal notranslate"><span class="pre">EmptyCellFillOption.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MinimalBoundingBox.html">11. minimalBoundingBox Python plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MinimalBoundingBox.html#cloudComPy.minimalBoundingBox.dist2"><code class="docutils literal notranslate"><span class="pre">dist2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MinimalBoundingBox.html#cloudComPy.minimalBoundingBox.findRotation"><code class="docutils literal notranslate"><span class="pre">findRotation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MinimalBoundingBox.html#cloudComPy.minimalBoundingBox.isocahedron"><code class="docutils literal notranslate"><span class="pre">isocahedron()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MinimalBoundingBox.html#cloudComPy.minimalBoundingBox.section"><code class="docutils literal notranslate"><span class="pre">section()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MinimalBoundingBox.html#cloudComPy.minimalBoundingBox.zinv"><code class="docutils literal notranslate"><span class="pre">zinv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Indices and tables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">1. general index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html#module-index">2. module index</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="1. cloudComPy: a first example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Paul RASCLE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
